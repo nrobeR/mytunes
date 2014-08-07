@@ -16,18 +16,16 @@ var SongQueue = Songs.extend({
 
   playFirst: function(){
     this.models[0].play();
-    // this.set('currentSong', )
   },
 
   hasEnded: function(){
-    this.models[0].destroy();
+    this.shift();
     this.hasSongs();
   },
 
   hasSongs: function(){
     if(this.length > 0){
       this.playFirst();
-      // appView.playerView.setSong(this.models[0]);
     }
   }
 });
