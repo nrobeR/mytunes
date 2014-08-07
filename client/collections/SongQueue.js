@@ -2,6 +2,32 @@
 var SongQueue = Songs.extend({
 
   initialize: function(){
-  }
+    this.on('add', this.isFirst, this);
+    this.on('ended', this.hasEnded, this);
+    this.on('dequeue', this.remove, this);
+    this.on('enqueue', this.isFirst, this);
+  },
 
+  isFirst: function() {
+    if(this.length === 1) {
+      this.playFirst();
+    }
+  },
+
+  playFirst: function(){
+    this.models[0].play();
+    // this.set('currentSong', )
+  },
+
+  hasEnded: function(){
+    this.models[0].destroy();
+    this.hasSongs();
+  },
+
+  hasSongs: function(){
+    if(this.length > 0){
+      this.playFirst();
+      // appView.playerView.setSong(this.models[0]);
+    }
+  }
 });
